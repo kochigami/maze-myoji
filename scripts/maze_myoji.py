@@ -7,52 +7,32 @@ import itertools
 # referred https://teratail.com/questions/44502, but it seems I don't have to use this
 
 def maze(myoji):
-    ans = []
-    for i in range(1, len(myoji)+1):
-        # 漢字をi個だけ選んで並べ替える
-        tmp_ans = list(itertools.combinations(myoji, i))
-        # ['東', '東', '東']の場合
-        # [('\xe6\x9d\xb1',), ('\xe6\x9d\xb1',), ('\xe6\x9d\xb1',)]
-        kanji_list = []
-        for j in range(len(tmp_ans)):
-            s = tmp_ans[j] # ('\xe6\x9d\xb1',)
+    # 3つずつに分割
+    tmp_kanji_bytecode_list = list(myoji)
+    kanji_bytecode_list = []
+    for i in range(0, len(tmp_kanji_bytecode_list), 3):
+        kanji_bytecode_list.append(tmp_kanji_bytecode_list[i]+tmp_kanji_bytecode_list[i+1]+tmp_kanji_bytecode_list[i+2])
+    
+    l=len(kanji_bytecode_list)
+    
+    for s, e in itertools.combinations(range(l), 2):
+        tmp = kanji_bytecode_list[s:e+1]
+        for v in list(itertools.permutations(tmp, len(tmp))):
             tmp_kanji_list = []
-            for k in range(len(s)):
-                tmp_kanji_list.append(s[k])
+            # v: ('\xe4\xb8\x8a',) や ('\xe8\xa5\xbf', '\xe4\xb8\xad', '\xe4\xb8\x8a')
+            for k in range(len(v)):
+                tmp_kanji_list.append(v[k])
             #print tmp_kanji_list # ['\xe6\x9d\xb1']
             kanji=''
             for k in tmp_kanji_list:
                 kanji += k
-            # print kanji # 東
-            
-            kanji_list.append(kanji)
-        ans += kanji_list
-        for k in ans:
-            print k
+            print kanji # 東
    
 if __name__ == '__main__':
+    # python maze_myoji.py 小田 中西
     args = sys.argv
-    print args
     myoji1 = args[1]
     myoji2 = args[2]
-    # 3つずつに分割
-    #print str(myoji1)
-    myoji1 = list(myoji1)
-    myoji2 = list(myoji2)
-    tmp1=[]
-    for i in range(0, len(myoji1), 3):
-        tmp1.append(myoji1[i]+myoji1[i+1]+myoji1[i+2])
-    tmp2=[]
-    for i in range(0, len(myoji2), 3):
-        tmp2.append(myoji2[i]+myoji2[i+1]+myoji2[i+2])
-    #print tmp1
-    #['\xe6\x9d\xb1']
-
-    #print tmp2
-    #['\xe6\x9d\xb1', '\xe6\x9d\xb1']
-
-    kanji = tmp1 + tmp2
-    #['\xe6\x9d\xb1', '\xe6\x9d\xb1', '\xe6\x9d\xb1']
-
-    maze(kanji)
+    myoji = myoji1 + myoji2
+    maze(myoji)
     

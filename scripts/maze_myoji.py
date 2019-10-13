@@ -13,6 +13,7 @@ def maze(myoji):
     # myoji: ['\xe5\xb0\x8f', '\xe7\x94\xb0', '\xe4\xb8\xad', '\xe8\xa5\xbf']
     
     count =0
+    new_myoji_list = []
     # myojiリスト2つ，3つ，リストの数分まで組を順番につくる
     for i in range(2, len(myoji)+1):
         # 2つの文字の時
@@ -26,8 +27,10 @@ def maze(myoji):
                 new_myoji=""
                 for l in k:
                     new_myoji+=l
-                print new_myoji
-                count +=1                
+                if not(new_myoji in new_myoji_list):
+                    new_myoji_list.append(new_myoji)
+                    print new_myoji
+                    count +=1
     print "The number of maze-myoji candidates is ... %d" % (count)
 
 if __name__ == '__main__':

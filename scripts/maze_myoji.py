@@ -5,7 +5,7 @@ import sys
 import itertools
 
 def maze(myoji):
-    print("Maze Myoji...\n")
+    print("\nMaze Myoji...\n")
 
     myoji = myoji.decode('utf-8')
     myoji = list(myoji)
@@ -34,11 +34,11 @@ def maze(myoji):
     print "The number of maze-myoji candidates is ... %d" % (count)
 
 if __name__ == '__main__':
-    # example of how to use: python maze_myoji.py 小田 中西
+    # example of how to use: python maze_myoji.py
 
     # コマンドラインから名字を取得
-    args = sys.argv
-    myoji1 = args[1] # 小田
-    myoji2 = args[2] # 中西
+    print "<<< まぜ名字 >>>"
+    myoji1 = raw_input("まぜる名字１つ目を教えてください： ") # 小田
+    myoji2 = raw_input("まぜる名字２つ目を教えてください： ") # 中西
     maze(myoji1 + myoji2) # 小田中西
     

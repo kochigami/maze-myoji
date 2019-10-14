@@ -14,11 +14,11 @@
 
 ```
 cd scripts
-python maze_myoji.py 小田 中西 # 名前の間は半角スペースを空ける
-```
+python maze_myoji.py
+<<< まぜ名字 >>>
+まぜる名字１つ目を教えてください： 小田
+まぜる名字２つ目を教えてください： 中西
 
-結果
-```
 Maze Myoji...
 
 小田
